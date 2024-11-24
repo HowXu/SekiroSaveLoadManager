@@ -1,53 +1,49 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net;
 using System.IO.Compression;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Windows.Forms;
 
 namespace SekiroSL
 {
-    public partial class Form2 : Form
+    public partial class Setting : Form
     {
 
         public List<FileInfo> FI = new List<FileInfo>();
         public string Version = "Alpha1.6";
 
-        public Form2()
+        public Setting()
         {
             InitializeComponent();
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            LanguageLabel.Text = (Owner as Form1).Jo["Language"].ToString();
-            groupBox1.Text = (Owner as Form1).Jo["Hotkeys"].ToString();
-            ClearButton1.Text = (Owner as Form1).Jo["Clear"].ToString();
+            LanguageLabel.Text = (Owner as MainWindow).Jo["Language"].ToString();
+            groupBox1.Text = (Owner as MainWindow).Jo["Hotkeys"].ToString();
+            ClearButton1.Text = (Owner as MainWindow).Jo["Clear"].ToString();
             ClearButton2.Text = ClearButton1.Text;
-            ApplyButton.Text = (Owner as Form1).Jo["Apply"].ToString();
-            CancelButton.Text = (Owner as Form1).Jo["Cancel"].ToString();
-            Text = (Owner as Form1).Jo["Settings"].ToString();
-            AboutLink.Text = (Owner as Form1).Jo["About"].ToString();
-            label2.Text = (Owner as Form1).Jo["Load"].ToString();
-            label3.Text = (Owner as Form1).Jo["Save"].ToString();
+            ApplyButton.Text = (Owner as MainWindow).Jo["Apply"].ToString();
+            CancelButton.Text = (Owner as MainWindow).Jo["Cancel"].ToString();
+            Text = (Owner as MainWindow).Jo["Settings"].ToString();
+            AboutLink.Text = (Owner as MainWindow).Jo["About"].ToString();
+            label2.Text = (Owner as MainWindow).Jo["Load"].ToString();
+            label3.Text = (Owner as MainWindow).Jo["Save"].ToString();
             FI = GetFile(Environment.CurrentDirectory + @"\Localization\", ".");
             comboBox1.DataSource = FI;
             comboBox1.Text = Settings1.Default.Language;
-            label1.Text = (Owner as Form1).Jo["File"].ToString();
+            label1.Text = (Owner as MainWindow).Jo["File"].ToString();
             textBox4.Text = Settings1.Default.GameDirectory;
-            label4.Text = (Owner as Form1).Jo["SoundEffectType"].ToString();
-            radioButton1.Text = (Owner as Form1).Jo["Ting"].ToString();
-            radioButton2.Text = (Owner as Form1).Jo["Google"].ToString();
-            radioButton3.Text = (Owner as Form1).Jo["Mute"].ToString();
-            button2.Text = (Owner as Form1).Jo["AutoLocated"].ToString();
+            label4.Text = (Owner as MainWindow).Jo["SoundEffectType"].ToString();
+            radioButton1.Text = (Owner as MainWindow).Jo["Ting"].ToString();
+            radioButton2.Text = (Owner as MainWindow).Jo["Google"].ToString();
+            radioButton3.Text = (Owner as MainWindow).Jo["Mute"].ToString();
+            button2.Text = (Owner as MainWindow).Jo["AutoLocated"].ToString();
             if (Settings1.Default.SoundType == "Mute")
             {
                 radioButton3.Checked = true;
@@ -136,7 +132,7 @@ namespace SekiroSL
             {
                 checkBox5.Checked = true;
             }
-            switch(Settings1.Default.LoadHotkey.ToString())
+            switch (Settings1.Default.LoadHotkey.ToString())
             {
                 case "D0":
                     LoadHotkey.Text = "0";
@@ -219,7 +215,7 @@ namespace SekiroSL
             FileInfo[] file = fdir.GetFiles();
             if (file.Length != 0 || dir.Length != 0)
             {
-                foreach (FileInfo f in file) 
+                foreach (FileInfo f in file)
                 {
                     if (extName.ToLower().IndexOf(f.Extension.ToLower()) >= 0)
                     {
@@ -228,7 +224,7 @@ namespace SekiroSL
                 }
                 foreach (string d in dir)
                 {
-                    GetFile(d, extName);  
+                    GetFile(d, extName);
                 }
             }
             return lst;
@@ -236,25 +232,25 @@ namespace SekiroSL
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            button2.Text = (Owner as Form1).Jo["AutoLocated"].ToString();
-            (Owner as Form1).Language = Form1.FileToString(Environment.CurrentDirectory + @"\Localization\" + comboBox1.Text);
-            (Owner as Form1).Jo = (JObject)JsonConvert.DeserializeObject((Owner as Form1).Language);
-            LanguageLabel.Text = (Owner as Form1).Jo["Language"].ToString();
-            groupBox1.Text = (Owner as Form1).Jo["Hotkeys"].ToString();
-            ClearButton1.Text = (Owner as Form1).Jo["Clear"].ToString();
+            button2.Text = (Owner as MainWindow).Jo["AutoLocated"].ToString();
+            (Owner as MainWindow).Language = MainWindow.FileToString(Environment.CurrentDirectory + @"\Localization\" + comboBox1.Text);
+            (Owner as MainWindow).Jo = (JObject)JsonConvert.DeserializeObject((Owner as MainWindow).Language);
+            LanguageLabel.Text = (Owner as MainWindow).Jo["Language"].ToString();
+            groupBox1.Text = (Owner as MainWindow).Jo["Hotkeys"].ToString();
+            ClearButton1.Text = (Owner as MainWindow).Jo["Clear"].ToString();
             ClearButton2.Text = ClearButton1.Text;
-            ApplyButton.Text = (Owner as Form1).Jo["Apply"].ToString();
-            CancelButton.Text = (Owner as Form1).Jo["Cancel"].ToString();
-            Text = (Owner as Form1).Jo["Settings"].ToString();
-            AboutLink.Text = (Owner as Form1).Jo["About"].ToString();
-            label2.Text = (Owner as Form1).Jo["Load"].ToString();
-            label3.Text = (Owner as Form1).Jo["Save"].ToString();
-            label1.Text = (Owner as Form1).Jo["File"].ToString();
-            button1.Text = (Owner as Form1).Jo["CheckUpdate"].ToString();
-            label4.Text = (Owner as Form1).Jo["SoundEffectType"].ToString();
-            radioButton1.Text = (Owner as Form1).Jo["Ting"].ToString();
-            radioButton2.Text = (Owner as Form1).Jo["Google"].ToString();
-            radioButton3.Text = (Owner as Form1).Jo["Mute"].ToString();
+            ApplyButton.Text = (Owner as MainWindow).Jo["Apply"].ToString();
+            CancelButton.Text = (Owner as MainWindow).Jo["Cancel"].ToString();
+            Text = (Owner as MainWindow).Jo["Settings"].ToString();
+            AboutLink.Text = (Owner as MainWindow).Jo["About"].ToString();
+            label2.Text = (Owner as MainWindow).Jo["Load"].ToString();
+            label3.Text = (Owner as MainWindow).Jo["Save"].ToString();
+            label1.Text = (Owner as MainWindow).Jo["File"].ToString();
+            button1.Text = (Owner as MainWindow).Jo["CheckUpdate"].ToString();
+            label4.Text = (Owner as MainWindow).Jo["SoundEffectType"].ToString();
+            radioButton1.Text = (Owner as MainWindow).Jo["Ting"].ToString();
+            radioButton2.Text = (Owner as MainWindow).Jo["Google"].ToString();
+            radioButton3.Text = (Owner as MainWindow).Jo["Mute"].ToString();
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
@@ -275,16 +271,16 @@ namespace SekiroSL
                 SaveMValue += 1;
             Settings1.Default.LoadModifier = LoadMValue;
             Settings1.Default.SaveModifier = SaveMValue;
-            if(LoadHotkey.Text != "Back" && LoadHotkey.Text != "Space" && LoadHotkey.Text != "" && LoadHotkey.Text != "None")
+            if (LoadHotkey.Text != "Back" && LoadHotkey.Text != "Space" && LoadHotkey.Text != "" && LoadHotkey.Text != "None")
             {
                 char[] Temp = LoadHotkey.Text.ToCharArray();
                 Settings1.Default.LoadHotkey = (Keys)Temp[0];
             }
-            else if(LoadHotkey.Text == "Back")
+            else if (LoadHotkey.Text == "Back")
             {
                 Settings1.Default.LoadHotkey = Keys.Back;
             }
-            else if(LoadHotkey.Text == "Space")
+            else if (LoadHotkey.Text == "Space")
             {
                 Settings1.Default.LoadHotkey = Keys.Space;
             }
@@ -314,7 +310,7 @@ namespace SekiroSL
             Settings1.Default.Language = comboBox1.Text;
             Settings1.Default.GameDirectory = textBox4.Text;
             Settings1.Default.Save();
-            (Owner as Form1).ReTranslateForm();
+            (Owner as MainWindow).ReTranslateForm();
             Close();
         }
 
@@ -325,8 +321,8 @@ namespace SekiroSL
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((Owner as Form1).Jo["CannotTransferAccount"].ToString());
-            openFileDialog1.Title = (Owner as Form1).Jo["File"].ToString();
+            MessageBox.Show((Owner as MainWindow).Jo["CannotTransferAccount"].ToString());
+            openFileDialog1.Title = (Owner as MainWindow).Jo["File"].ToString();
             openFileDialog1.ShowDialog();
             if (openFileDialog1.FileName != "openFileDialog1")
             {
@@ -337,38 +333,38 @@ namespace SekiroSL
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Settings1.Default.Reload();
-            (Owner as Form1).ReTranslateForm();
+            (Owner as MainWindow).ReTranslateForm();
             Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string sourcecode = GetHtmlWithUtf("https://shenkspz.wixsite.com/collection/blank");
-            Console.WriteLine(sourcecode);
-            if(sourcecode != null)
+            Log.log(sourcecode);
+            if (sourcecode != null)
             {
                 string VA = GetBetweenArr(sourcecode, "只狼存档工具 <span style=\"font-size:17px;\">", "</span>");
-                if(VA != "")
+                if (VA != "")
                 {
                     if (VA != Version)
                     {
-                        Console.WriteLine(VA);
-                        if ((int)MessageBox.Show((Owner as Form1).Jo["NewVersion"].ToString() + VA, (Owner as Form1).Jo["SekiroSL"].ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == 6)
+                        Log.log(VA);
+                        if ((int)MessageBox.Show((Owner as MainWindow).Jo["NewVersion"].ToString() + VA, (Owner as MainWindow).Jo["SekiroSL"].ToString(), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == 6)
                         {
                             System.Diagnostics.Process.Start("https://github.com/ShenKSPZ/SekiroSaveLoadManager/release");
                         }
                     }
                     else
                     {
-                        MessageBox.Show((Owner as Form1).Jo["AlreadyNewest"].ToString(), (Owner as Form1).Jo["SekiroSL"].ToString());
+                        MessageBox.Show((Owner as MainWindow).Jo["AlreadyNewest"].ToString(), (Owner as MainWindow).Jo["SekiroSL"].ToString());
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Can't get source code");
+                    Log.log("Can't get source code");
                 }
             }
-            
+
         }
 
         public string GetHttpWebRequest(string url)
@@ -486,12 +482,12 @@ namespace SekiroSL
                 LoadHotkey.Text = e.KeyChar.ToString().ToUpper();
                 e.Handled = true;
             }
-            else if(e.KeyChar == 8)
+            else if (e.KeyChar == 8)
             {
                 LoadHotkey.Text = "Back";
                 e.Handled = true;
             }
-            else if(e.KeyChar == 32)
+            else if (e.KeyChar == 32)
             {
                 LoadHotkey.Text = "Space";
                 e.Handled = true;
@@ -504,7 +500,7 @@ namespace SekiroSL
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox4.Checked == true)
+            if (checkBox4.Checked == true)
             {
                 checkBox1.Checked = false;
                 checkBox2.Checked = false;
@@ -514,7 +510,7 @@ namespace SekiroSL
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked == true)
+            if (checkBox1.Checked == true)
             {
                 checkBox4.Checked = false;
             }
@@ -530,7 +526,7 @@ namespace SekiroSL
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox3.Checked == true)
+            if (checkBox3.Checked == true)
             {
                 checkBox4.Checked = false;
             }
@@ -615,28 +611,23 @@ namespace SekiroSL
                 if (di.Count() == 1)
                 {
                     Settings1.Default.GameDirectory = di[0].FullName + @"\" + Settings1.Default.SaveFileName;
-                    MessageBox.Show((Owner as Form1).Jo["FindSekiro"].ToString());
+                    MessageBox.Show((Owner as MainWindow).Jo["FindSekiro"].ToString());
                 }
                 else
                 {
-                    MessageBox.Show((Owner as Form1).Jo["SaveIntroduce"].ToString());
+                    MessageBox.Show((Owner as MainWindow).Jo["SaveIntroduce"].ToString());
                     openFileDialog1.ShowDialog();
                     Settings1.Default.GameDirectory = openFileDialog1.FileName;
                 }
             }
             else
             {
-                MessageBox.Show((Owner as Form1).Jo["CannotFindSekiro"].ToString());
+                MessageBox.Show((Owner as MainWindow).Jo["CannotFindSekiro"].ToString());
                 openFileDialog1.ShowDialog();
                 Settings1.Default.GameDirectory = openFileDialog1.FileName;
             }
             Settings1.Default.Save();
             textBox4.Text = Settings1.Default.GameDirectory;
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
