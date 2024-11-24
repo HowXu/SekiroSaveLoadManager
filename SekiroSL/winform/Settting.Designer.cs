@@ -1,6 +1,6 @@
 ﻿namespace SekiroSL
 {
-    partial class Form2
+    partial class Setting
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setting));
             this.ApplyButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.LanguageLabel = new System.Windows.Forms.Label();
@@ -349,7 +350,7 @@
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Adobe Gothic Std B", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(246, 355);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(30, 27);
@@ -384,8 +385,8 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(198, 20);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Alpha1.6   Copyright by 深空";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.label5.Text = MainWindow.Version + "   " + "Copyright by 深空";
+            //this.label5.Text = "Alpha1.6   Copyright by 深空";
             // 
             // button1
             // 
@@ -409,7 +410,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Form2
+            // About
             // 
             this.AcceptButton = this.ApplyButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -428,9 +429,10 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.ApplyButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form2";
+            this.Name = "About";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);

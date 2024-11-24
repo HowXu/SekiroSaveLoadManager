@@ -1,0 +1,1 @@
+You can copy the "English" file and open it as TXT file or using any JSON editor to translate it to any language. 
